@@ -1,0 +1,101 @@
+﻿@model RealEstateApp.Core.Application.ViewModels.User.SaveUserViewModel
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3 mt-5">
+            <div class="card border rounded-3 shadow">
+                <div class="card-header text-center bg-dark text-white rounded-top-4">
+                    <h2 class="mt-2">Registro</h2>
+                </div>
+                <div class="card-body">
+                    @if (Model.HasError)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <p>@Model.Error</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+
+                    <form method="post" class="form-label" asp-controller="Auth" asp-action="Register" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="FirstName">Nombre:</label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="LastName">Apellido:</label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Username">Nombre de usuario:</label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="Password">Contraseña:</label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="ConfirmPassword">Confirmar contraseña:</label>
+                                    <input asp-for="ConfirmPassword" class="form-control" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Phone">Teléfono:</label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Email">Correo:</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Photo">Foto:</label>
+                            <input asp-for="Photo" class="form-control" />
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UserType">Tipo de Usuario:</label>
+                            <select asp-for="UserType" class="form-control">
+                                <option value="@RealEstateApp.Core.Application.Enums.Roles.Agent.ToString()">Agente</option>
+                                <option value="@RealEstateApp.Core.Application.Enums.Roles.Client.ToString()">Cliente</option>
+                            </select>
+                            <span asp-validation-for="UserType" class="text-danger"></span>
+                        </div>
+
+                        <div class="btn-group float-end">
+                            <a asp-controller="Auth" asp-action="Index" class="btn btn-outline-danger">Volver atrás</a>
+                            <button type="submit" class="btn btn-outline-dark">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

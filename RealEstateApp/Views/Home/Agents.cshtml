@@ -1,0 +1,35 @@
+﻿<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="bg-dark p-4 rounded-3 shadow-lg text-center">
+                <label class="form-label text-light lead">Buscar agente</label>
+                <form class="d-flex justify-content-center" asp-controller="Home" asp-action="Agents">
+                    <input name="SearchString" type="search" placeholder="Ingrese el primer nombre del agente" class="form-control me-2 rounded-3">
+                    <button type="submit" class="btn btn-outline-light"> <i class="bi bi-search"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container marketing mt-4">
+        <div class="row justify-content-center">
+            @if (Model == null || Model.Count == 0)
+            {
+                <h4 class="text-center text-muted">No hay agentes disponibles</h4>
+            }
+
+            @foreach (var agente in Model)
+            {
+                <div class="col-lg-3 mt-4">
+                    <div class="card border-0 shadow-lg rounded-3 p-3 d-flex flex-column align-items-center">
+                        <img class="mb-3 rounded-circle border border-2 border-dark mx-auto d-block" width="140" height="140" src="@agente.PhotoUrl">
+                        <h4 class="fw-bold text-center">@agente.FirstName @agente.LastName</h4>
+                        <p>
+                            <a class="btn btn-outline-dark mt-2" asp-controller="Home" asp-action="PropertiesByAgentId" asp-route-id="@agente.Id">Ver propiedades »</a>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

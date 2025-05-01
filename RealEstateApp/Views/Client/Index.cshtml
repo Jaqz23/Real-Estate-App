@@ -1,0 +1,120 @@
+﻿@using RealEstateApp.Core.Application.ViewModels.Property
+@model List<RealEstateApp.Core.Application.ViewModels.Property.PropertyViewModel>
+
+<div class="container-fluid px-4">
+    <!-- Filtro y búsqueda -->
+    <div class="card border mt-4 shadow-sm px-4 py-3">
+        <div class="row gy-3">
+            <div class="col-lg-3 col-md-6">
+                <form class="d-flex" asp-controller="Home" asp-action="Index">
+                    <input name="SearchString" type="search" placeholder="Buscar por código" class="form-control me-2">
+                    <button type="submit" class="btn btn-dark">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="col-lg-9 col-md-12">
+                <form class="row gx-2 gy-2 align-items-end" method="post" asp-controller="Home" asp-action="IndexFilter">
+                    <div class="col-md-3">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-dark dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                                Tipo de propiedad
+                            </button>
+                            <ul class="dropdown-menu w-100 px-3">
+                                @foreach (var propertyType in ViewBag.PropetyTypes)
+                                {
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="PropertyType" value="@propertyType.Id" id="property-@propertyType.Id">
+                                            <label class="form-check-label" for="property-@propertyType.Id">@propertyType.Name</label>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <input type="number" name="MinPrice" class="form-control" placeholder="Precio mín.">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" name="MaxPrice" class="form-control" placeholder="Precio máx.">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" name="NumberOfRooms" class="form-control" placeholder="Habitaciones">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" name="NumberOfBathRooms" class="form-control" placeholder="Baños">
+                    </div>
+                    <div class="col-md-1 text-end">
+                        <button type="submit" class="btn btn-dark w-100">Filtrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listado de propiedades -->
+    <div class="container mt-4">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h4 class="text-center mt-5">No hay propiedades</h4>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var propiedad in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <a class="text-decoration-none text-dark" asp-controller="Home" asp-action="Details" asp-route-id="@propiedad.Id">
+                            <div class="card h-100 shadow-sm border-0">
+                                <div class="position-relative">
+                                    <img class="card-img-top" src="@propiedad.ImagesUrl.FirstOrDefault()" alt="Imagen propiedad" style="height: 220px; object-fit: cover;">
+                                    <span class="badge bg-primary position-absolute top-0 end-0 m-2">Cod. @propiedad.Code</span>
+
+                                    @if (ViewBag.FavoriteProperties != null)
+                                    {
+                                        var favoriteProperties = ViewBag.FavoriteProperties as List<PropertyViewModel>;
+                                        var isFavorite = favoriteProperties.Any(f => f.Id == propiedad.Id);
+                                        <div class="position-absolute bottom-0 end-0 m-2">
+                                            @if (isFavorite)
+                                            {
+                                                <a class="btn bg-dark shadow" asp-controller="Client" asp-action="DisLikeProperty" asp-route-id="@propiedad.Id">
+                                                    <i class="bi bi-bookmark-fill" style="color: #0d6efd; font-size: 1.1rem;"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn bg-dark shadow" asp-controller="Client" asp-action="LikeProperty" asp-route-id="@propiedad.Id">
+                                                    <i class="bi bi-bookmark" style="color: #0d6efd; font-size: 1.1rem;"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@propiedad.PropertyType</h5>
+                                    <p class="mb-2 text-muted">@propiedad.SaleType.ToUpper()</p>
+                                    <p class="fw-bold fs-5 mb-0">@string.Format("DOP{0:C}", propiedad.Price)</p>
+                                </div>
+                                <div class="card-footer bg-white border-top">
+                                    <div class="d-flex justify-content-between text-center small">
+                                        <div>
+                                            <i class="fas fa-bath me-1"></i> @propiedad.NumberOfBathrooms <br> <span class="text-muted">Baños</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-door-closed me-1"></i> @propiedad.NumberOfRooms <br> <span class="text-muted">Habitaciones</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-expand-arrows-alt me-1"></i> @propiedad.LandSize m² <br> <span class="text-muted">Área</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
