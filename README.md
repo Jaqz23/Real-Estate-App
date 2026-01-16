@@ -2,14 +2,14 @@
 
 **RealEstateApp** is a complete real estate management system developed with **ASP.NET Core 8** using **Onion Architecture**, offering a secure and robust solution for clients, agents, and administrators.
 
-## 📖 About the Project
+##  About the Project
 
 This project is divided into two parts:
 
 - **Web Application** (MVC + Identity): For clients, agents, and administrators.
 - **RESTful API** (JWT Secured): For administrators and developers.
 
-### 👤 Roles
+###  Roles
 
 - **Administrator**
 - **Agent**
@@ -18,15 +18,15 @@ This project is divided into two parts:
 
 ---
 
-## 🌐 Web Application Features
+##  Web Application Features
 
-### 🔑 Authentication
+###  Authentication
 
 - Role-based login (Client, Agent, Admin)
 - Registration with activation logic (Email for Clients, Admin approval for Agents)
 - Unauthorized access is redirected or blocked via `[Authorize]` filters
 
-### 🏠 Public Home
+###  Public Home
 
 - Lists all available properties (latest first)
 - Filters by:
@@ -35,19 +35,19 @@ This project is divided into two parts:
   - Number of Bedrooms / Bathrooms
   - Property Code search
 
-### 👨‍💼 Client Features
+###  Client Features
 
 - Mark/unmark properties as favorites
 - View agent details
 - View list of favorite properties
 - Session-based navigation menu
 
-### 🧑‍💼 Agent Features
+###  Agent Features
 
 - Manage own properties (CRUD, with images)
 - Edit profile information
 
-### 👨‍💻 Admin Features
+###  Admin Features
 
 - Dashboard with key statistics:
   - Users: Active / Inactive
@@ -62,7 +62,7 @@ This project is divided into two parts:
 
 ---
 
-## 🔐 API Features (JWT Protected)
+##  API Features (JWT Protected)
 
 Accessible only to **Admins and Developers**
 
@@ -82,7 +82,7 @@ Accessible only to **Admins and Developers**
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - **ASP.NET Core 8**
 - **Entity Framework Core (Code First)**
@@ -98,7 +98,7 @@ Accessible only to **Admins and Developers**
 
 ---
 
-## 📸 Project Images
+##  Project Images
 
 ### Public Home
 ![Public Home](https://github.com/Jaqz23/Real-Estate-App/blob/7bf88d5f5d1ffea496ca2b7cfd94a6b048138711/images/home.png)
@@ -119,7 +119,7 @@ Accessible only to **Admins and Developers**
 ![Admin Dashboard](https://github.com/Jaqz23/Real-Estate-App/blob/7bf88d5f5d1ffea496ca2b7cfd94a6b048138711/images/Admin%20Dashboard.png)
 
 
-## 📋 Prerequisites
+##  Prerequisites
 
 - Visual Studio 2022 or later
 - ASP.NET Core 8
