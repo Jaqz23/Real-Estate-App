@@ -141,5 +141,23 @@ Accessible only to **Admins and Developers**
     "SmtpPass": "your-smtp-password",
     "DisplayName": "Social Network mail"
    }
-5. Open Package Manager Console in Visual Studio and run `Update-Database` to apply migrations.
-6. Run the project and access it in your browser.
+5. Open **Package Manager Console**.
+
+6. This solution contains **two DbContext classes**:
+
+   - `ApplicationContext` (main application database)
+   - `IdentityContext` (ASP.NET Core Identity)
+
+   Run the migrations in the following order:
+
+```powershell
+Update-Database -Context ApplicationContext
+```
+
+```powershell
+Update-Database -Context IdentityContext
+```
+
+7. Set the Web project as the startup project (if it is not already).
+
+8. Run the application.
